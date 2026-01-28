@@ -1,0 +1,329 @@
+{
+  "Scope1_FixedCombustion": {
+    "_description": "Scope 1 - Fixed Combustion Sources (Natural Gas)",
+    "formulas": {
+      "NaturalGasCO2e": {
+        "stub": "NaturalGasCO2e",
+        "formula": "(m3 * (CH4_XGWP + CO2_XGWP + N2O_XGWP)) / 1000"
+      },
+      "FixedCO2e": {
+        "stub": "FixedCO2e",
+        "formula": "NaturalGasCO2e"
+      }
+    },
+    "data": {
+      "m3": {
+        "name": "Natural Gas Activity Data (m³)",
+        "value": 104252.79
+      },
+      "N2O_XGWP": {
+        "name": "N2O Emission Factor",
+        "value": 0.00091
+      },
+      "CO2_XGWP": {
+        "name": "CO2 Emission Factor",
+        "value": 1.87904
+      },
+      "CH4_XGWP": {
+        "name": "CH4 Emission Factor",
+        "value": 0.00093
+      }
+    }
+  },
+  "Scope1_Fugitive": {
+    "_description": "Scope 1 - Fugitive Emissions (Refrigerants, Fire Extinguishers, Septic Tank)",
+    "formulas": {
+      "ChillerCO2e": {
+        "stub": "ChillerCO2e",
+        "formula": "(R134a * R134a_XGWP + R407c * R407c_XGWP + R410A_C * R410A_C_XGWP) / 1000"
+      },
+      "BuildingCO2e": {
+        "stub": "BuildingCO2e",
+        "formula": "(R410A_AC * R410A_AC_XGWP) / 1000"
+      },
+      "ExtinguisherCO2e": {
+        "stub": "ExtinguisherCO2e",
+        "formula": "(Extinguisher * Extinguisher_XGWP) / 1000"
+      },
+      "SepticTankCO2e": {
+        "stub": "SepticTankCO2e",
+        "formula": "(SepticTank_kg * SepticTankCH4_XGWP) / 1000"
+      },
+      "FugitiveCO2e": {
+        "stub": "FugitiveCO2e",
+        "formula": "ChillerCO2e + BuildingCO2e + ExtinguisherCO2e + SepticTankCO2e"
+      }
+    },
+    "data": {
+      "R134a": {
+        "name": "R134a Chiller Emission (kg)",
+        "value": 159.39
+      },
+      "R134a_XGWP": {
+        "name": "R134a Emission Factor",
+        "value": 130.05
+      },
+      "R407c": {
+        "name": "R407c Chiller Emission (kg)",
+        "value": 193.545
+      },
+      "R407c_XGWP": {
+        "name": "R407c Chiller Emission Factor",
+        "value": 162.18
+      },
+      "R410A_C": {
+        "name": "R410A Chiller Emission (kg)",
+        "value": 66.24
+      },
+      "R410A_C_XGWP": {
+        "name": "R410A Chiller Emission Factor",
+        "value": 191.718
+      },
+      "R410A_AC": {
+        "name": "R410A AC Emission (kg)",
+        "value": 60.72
+      },
+      "R410A_AC_XGWP": {
+        "name": "R410A AC Emission Factor",
+        "value": 124.053
+      },
+      "Extinguisher": {
+        "name": "Extinguisher Emission (kg)",
+        "value": 14.145
+      },
+      "Extinguisher_XGWP": {
+        "name": "Extinguisher Emission Factor",
+        "value": 1
+      },
+      "SepticTank_kg": {
+        "name": "Septic Tank Emission (kg)",
+        "value": 527777.062377
+      },
+      "SepticTankCH4_XGWP": {
+        "name": "CH4 Emission Factor",
+        "value": 0.10672
+      }
+    }
+  },
+  "Scope1_Mobile": {
+    "_description": "Scope 1 - Mobile Combustion Sources (Vehicles, Equipment)",
+    "formulas": {
+      "ULP92_Mower": {
+        "stub": "ULP92_Mower",
+        "formula": "(ULP92 * (ULP92_CH4_XGWP + ULP92_CO2_XGWP + ULP92_N2O_XGWP)) / 1000"
+      },
+      "ULP98_CompanyCar": {
+        "stub": "ULP98_CompanyCar",
+        "formula": "(ULP98 * (ULP98_CH4_XGWP + ULP98_CO2_XGWP + ULP98_N2O_XGWP)) / 1000"
+      },
+      "ULP95_CompanyCar": {
+        "stub": "ULP95_CompanyCar",
+        "formula": "(ULP95 * (ULP95_CH4_XGWP + ULP95_CO2_XGWP + ULP95_N2O_XGWP)) / 1000"
+      },
+      "MotorPetrolCO2e": {
+        "stub": "MotorPetrolCO2e",
+        "formula": "ULP92_Mower + ULP98_CompanyCar + ULP95_CompanyCar"
+      },
+      "Diesel_CompanyCar": {
+        "stub": "Diesel_CompanyCar",
+        "formula": "(DieselData1 * (Diesel_CH4_XGWP + Diesel_CO2_XGWP + Diesel_N2O_XGWP)) / 1000"
+      },
+      "Diesel_Stacker": {
+        "stub": "Diesel_Stacker",
+        "formula": "(DieselData2 * (Diesel_CH4_XGWP + Diesel_CO2_XGWP + Diesel_N2O_XGWP)) / 1000"
+      },
+      "Diesel_Truck": {
+        "stub": "Diesel_Truck",
+        "formula": "(DieselData3 * (Diesel_CH4_XGWP + Diesel_CO2_XGWP + Diesel_N2O_XGWP)) / 1000"
+      },
+      "DieselCO2e": {
+        "stub": "DieselCO2e",
+        "formula": "Diesel_CompanyCar + Diesel_Stacker + Diesel_Truck"
+      },
+      "LPGCO2e": {
+        "stub": "LPGCO2e",
+        "formula": "(LPGData * (LPG_CH4_XGWP + LPG_CO2_XGWP + LPG_N2O_XGWP)) / 1000"
+      },
+      "MobileCO2e": {
+        "stub": "MobileCO2e",
+        "formula": "DieselCO2e + MotorPetrolCO2e + LPGCO2e"
+      }
+    },
+    "data": {
+      "ULP92": {
+        "name": "ULP92 Consumption (L)",
+        "value": 109.86179999999999
+      },
+      "ULP92_CH4_XGWP": {
+        "name": "ULP92 CH4 Factor",
+        "value": 0.02278
+      },
+      "ULP92_CO2_XGWP": {
+        "name": "ULP92 CO2 Factor",
+        "value": 2.263
+      },
+      "ULP92_N2O_XGWP": {
+        "name": "ULP92 N2O Factor",
+        "value": 0.07132
+      },
+      "ULP98": {
+        "name": "ULP98 Consumption (L)",
+        "value": 3851.6351999999997
+      },
+      "ULP98_CH4_XGWP": {
+        "name": "ULP98 CH4 Factor",
+        "value": 0.02278
+      },
+      "ULP98_CO2_XGWP": {
+        "name": "ULP98 CO2 Factor",
+        "value": 2.26313
+      },
+      "ULP98_N2O_XGWP": {
+        "name": "ULP98 N2O Factor",
+        "value": 0.07132
+      },
+      "ULP95": {
+        "name": "ULP95 Consumption (L)",
+        "value": 6359.90526
+      },
+      "ULP95_CH4_XGWP": {
+        "name": "ULP95 CH4 Factor",
+        "value": 0.02278
+      },
+      "ULP95_CO2_XGWP": {
+        "name": "ULP95 CO2 Factor",
+        "value": 2.263
+      },
+      "ULP95_N2O_XGWP": {
+        "name": "ULP95 N2O Factor",
+        "value": 0.07132
+      },
+      "DieselData1": {
+        "name": "Diesel - Company Car (L)",
+        "value": 769.2948
+      },
+      "DieselData2": {
+        "name": "Diesel - Stacker (L)",
+        "value": 1463.89089
+      },
+      "DieselData3": {
+        "name": "Diesel - Truck (L)",
+        "value": 3860.8880999999997
+      },
+      "Diesel_CH4_XGWP": {
+        "name": "Diesel CH4 Factor",
+        "value": 0.00383
+      },
+      "Diesel_CO2_XGWP": {
+        "name": "Diesel CO2 Factor",
+        "value": 2.60603
+      },
+      "Diesel_N2O_XGWP": {
+        "name": "Diesel N2O Factor",
+        "value": 0.03744
+      },
+      "LPGData": {
+        "name": "LPG Consumption (L)",
+        "value": 2729.6179199999997
+      },
+      "LPG_CH4_XGWP": {
+        "name": "LPG CH4 Factor",
+        "value": 0.040805
+      },
+      "LPG_CO2_XGWP": {
+        "name": "LPG CO2 Factor",
+        "value": 1.75288
+      },
+      "LPG_N2O_XGWP": {
+        "name": "LPG N2O Factor",
+        "value": 0.00152
+      }
+    }
+  },
+  "Scope1_Total": {
+    "_description": "Scope 1 Summary - Direct Emissions",
+    "formulas": {
+      "Scope 1 Total": {
+        "stub": "Scope1_Total",
+        "formula": "FixedCO2e + FugitiveCO2e + MobileCO2e"
+      }
+    },
+    "data": {}
+  },
+  "Scope2_Electricity": {
+    "_description": "Scope 2 - Purchased Electricity",
+    "formulas": {
+      "PurchasedElectricityCO2e": {
+        "stub": "PurchasedElectricityCO2e",
+        "formula": "(ElectricityData * Electricity_CO2_XGWP) / 1000"
+      },
+      "Scope2CO2e": {
+        "stub": "Scope2CO2e",
+        "formula": "PurchasedElectricityCO2e"
+      }
+    },
+    "data": {
+      "ElectricityData": {
+        "name": "Electricity Usage (kWh)",
+        "value": 17568504.0
+      },
+      "Electricity_CO2_XGWP": {
+        "name": "Electricity CO2 Factor (kg CO2e/kWh)",
+        "value": 0.495
+      }
+    }
+  },
+  "Scope2_Total": {
+    "_description": "Scope 2 Summary - Indirect Emissions from Purchased Energy",
+    "formulas": {
+      "Scope 2 Total": {
+        "stub": "Scope2_Total",
+        "formula": "Scope2CO2e"
+      }
+    },
+    "data": {}
+  },
+  "Scope3_Water": {
+    "_description": "Scope 3 - Water Consumption",
+    "formulas": {
+      "TapWaterCO2e": {
+        "stub": "TapWaterCO2e",
+        "formula": "(TapWaterData * TapWater_CO2_XGWP) / 1000"
+      },
+      "Scope3CO2e": {
+        "stub": "Scope3CO2e",
+        "formula": "TapWaterCO2e"
+      }
+    },
+    "data": {
+      "TapWaterData": {
+        "name": "Tap Water Usage (L)",
+        "value": 0.0
+      },
+      "TapWater_CO2_XGWP": {
+        "name": "Tap Water CO2 Factor (kg CO2e/L)",
+        "value": 0.233
+      }
+    }
+  },
+  "Scope3_Total": {
+    "_description": "Scope 3 Summary - Other Indirect Emissions",
+    "formulas": {
+      "Scope 3 Total": {
+        "stub": "Scope3_Total",
+        "formula": "Scope3CO2e"
+      }
+    },
+    "data": {}
+  },
+  "GrandTotal": {
+    "_description": "Organization Total Carbon Footprint",
+    "formulas": {
+      "Total Carbon Footprint": {
+        "stub": "TotalCO2e",
+        "formula": "Scope1_Total + Scope2_Total + Scope3_Total"
+      }
+    },
+    "data": {}
+  }
+}

@@ -1,0 +1,343 @@
+{
+  "Scope1_SourceA": {
+    "formulas": {
+      "Fuel Total Consumption": {
+        "stub": "FuelTotal",
+        "formula": "Fuel_TypeA + Fuel_TypeB + Fuel_TypeC"
+      },
+      "Net Emission After Offset": {
+        "stub": "NetEmission_A",
+        "formula": "FuelTotal - Carbon_Offset"
+      },
+      "Source A CO2e": {
+        "stub": "SourceA_CO2e",
+        "formula": "NetEmission_A + Additional_Emission"
+      }
+    },
+    "data": {
+      "Fuel_TypeA": {
+        "name": "Fuel Type A Consumption (kg)",
+        "value": 5000
+      },
+      "Fuel_TypeB": {
+        "name": "Fuel Type B Consumption (kg)",
+        "value": 4000
+      },
+      "Fuel_TypeC": {
+        "name": "Fuel Type C Consumption (kg)",
+        "value": 2000
+      },
+      "Carbon_Offset": {
+        "name": "Carbon Offset Credits (kg CO2e)",
+        "value": 100
+      },
+      "Additional_Emission": {
+        "name": "Additional Emission (kg CO2e)",
+        "value": 50
+      }
+    }
+  },
+  "Scope1_SourceB": {
+    "_description": "Example: Multiplication - Mobile combustion with emission factors",
+    "formulas": {
+      "Vehicle Emission": {
+        "stub": "VehicleEmission",
+        "formula": "Fuel_Consumption * Emission_Factor"
+      },
+      "Equipment Emission": {
+        "stub": "EquipmentEmission",
+        "formula": "Equipment_Hours * Fuel_Rate * Equipment_EF"
+      },
+      "Source B CO2e": {
+        "stub": "SourceB_CO2e",
+        "formula": "VehicleEmission + EquipmentEmission"
+      }
+    },
+    "data": {
+      "Fuel_Consumption": {
+        "name": "Vehicle Fuel Consumption (liters)",
+        "value": 5000
+      },
+      "Emission_Factor": {
+        "name": "Fuel Emission Factor (kg CO2e/liter)",
+        "value": 2.31
+      },
+      "Equipment_Hours": {
+        "name": "Equipment Operating Hours",
+        "value": 1000
+      },
+      "Fuel_Rate": {
+        "name": "Fuel Consumption Rate (liters/hour)",
+        "value": 15
+      },
+      "Equipment_EF": {
+        "name": "Equipment Emission Factor (kg CO2e/liter)",
+        "value": 2.68
+      }
+    }
+  },
+  "Scope1_Total": {
+    "_description": "Scope 1 Summary - References results from SourceA and SourceB",
+    "formulas": {
+      "Scope 1 Total": {
+        "stub": "Scope1_Total",
+        "formula": "SourceA_CO2e + SourceB_CO2e"
+      }
+    },
+    "data": {}
+  },
+  "Scope2_Electricity": {
+    "_description": "Example: Division - Electricity with efficiency and loss calculations",
+    "formulas": {
+      "Gross Electricity": {
+        "stub": "GrossElectricity",
+        "formula": "Metered_Electricity / Meter_Accuracy"
+      },
+      "Transmission Loss": {
+        "stub": "TransmissionLoss",
+        "formula": "GrossElectricity * Loss_Rate / 100"
+      },
+      "Net Electricity CO2e": {
+        "stub": "NetElectricity_CO2e",
+        "formula": "(GrossElectricity + TransmissionLoss) * Grid_EF"
+      }
+    },
+    "data": {
+      "Metered_Electricity": {
+        "name": "Metered Electricity Usage (kWh)",
+        "value": 80000
+      },
+      "Meter_Accuracy": {
+        "name": "Meter Accuracy Factor (e.g., 0.98 = 98% accurate)",
+        "value": 0.98
+      },
+      "Loss_Rate": {
+        "name": "Transmission Loss Rate (%)",
+        "value": 5
+      },
+      "Grid_EF": {
+        "name": "Grid Emission Factor (kg CO2e/kWh)",
+        "value": 0.5
+      }
+    }
+  },
+  "Scope2_Steam": {
+    "_description": "Example: Complex division and multiplication - Purchased steam/heat",
+    "formulas": {
+      "Steam Energy Content": {
+        "stub": "SteamEnergy",
+        "formula": "Steam_Mass * Enthalpy_Difference / 1000"
+      },
+      "Boiler Input Energy": {
+        "stub": "BoilerInput",
+        "formula": "SteamEnergy / Boiler_Efficiency"
+      },
+      "Steam CO2e": {
+        "stub": "Steam_CO2e",
+        "formula": "BoilerInput * Fuel_EF"
+      }
+    },
+    "data": {
+      "Steam_Mass": {
+        "name": "Purchased Steam Mass (kg)",
+        "value": 200
+      },
+      "Enthalpy_Difference": {
+        "name": "Enthalpy Difference (kJ/kg)",
+        "value": 2670
+      },
+      "Boiler_Efficiency": {
+        "name": "Boiler Efficiency (decimal, e.g., 0.85)",
+        "value": 0.85
+      },
+      "Fuel_EF": {
+        "name": "Fuel Emission Factor (kg CO2e/GJ)",
+        "value": 56.1
+      }
+    }
+  },
+  "Scope2_Total": {
+    "_description": "Scope 2 Summary",
+    "formulas": {
+      "Scope 2 Total": {
+        "stub": "Scope2_Total",
+        "formula": "NetElectricity_CO2e + Steam_CO2e"
+      }
+    },
+    "data": {}
+  },
+  "Scope3_Transport": {
+    "_description": "Example: Power/Exponent - Distance-based calculations with scaling",
+    "formulas": {
+      "Base Transport Emission": {
+        "stub": "BaseTransport",
+        "formula": "Distance * Weight * Transport_EF"
+      },
+      "Scaling Factor": {
+        "stub": "ScalingFactor",
+        "formula": "Base_Scale ** Scale_Exponent"
+      },
+      "Scaled Transport CO2e": {
+        "stub": "ScaledTransport_CO2e",
+        "formula": "BaseTransport * ScalingFactor"
+      }
+    },
+    "data": {
+      "Distance": {
+        "name": "Transport Distance (km)",
+        "value": 2500
+      },
+      "Weight": {
+        "name": "Cargo Weight (tonnes)",
+        "value": 10
+      },
+      "Transport_EF": {
+        "name": "Transport Emission Factor (kg CO2e/tonne-km)",
+        "value": 0.1
+      },
+      "Base_Scale": {
+        "name": "Base Scaling Value",
+        "value": 1.05
+      },
+      "Scale_Exponent": {
+        "name": "Scaling Exponent (e.g., 2 for square)",
+        "value": 2
+      }
+    }
+  },
+  "Scope3_Waste": {
+    "_description": "Example: Square root and complex formulas - Waste decomposition model",
+    "formulas": {
+      "Decomposition Factor": {
+        "stub": "DecompFactor",
+        "formula": "(Waste_Mass * Organic_Content) ** 0.5"
+      },
+      "Methane Generation": {
+        "stub": "MethaneGen",
+        "formula": "DecompFactor * Methane_Potential * (1 - Recovery_Rate / 100)"
+      },
+      "Waste CO2e": {
+        "stub": "Waste_CO2e",
+        "formula": "MethaneGen * CH4_GWP"
+      }
+    },
+    "data": {
+      "Waste_Mass": {
+        "name": "Total Waste Mass (tonnes)",
+        "value": 2000
+      },
+      "Organic_Content": {
+        "name": "Organic Content Fraction (decimal)",
+        "value": 0.6
+      },
+      "Methane_Potential": {
+        "name": "Methane Generation Potential (kg CH4/tonne)",
+        "value": 50
+      },
+      "Recovery_Rate": {
+        "name": "Methane Recovery Rate (%)",
+        "value": 30
+      },
+      "CH4_GWP": {
+        "name": "Methane Global Warming Potential",
+        "value": 28
+      }
+    }
+  },
+  "Scope3_Water": {
+    "_description": "Example: Multiple operations combined - Water treatment emissions",
+    "formulas": {
+      "Treatment Energy": {
+        "stub": "TreatmentEnergy",
+        "formula": "Water_Volume * Energy_Intensity / 1000"
+      },
+      "Chemical Emission": {
+        "stub": "ChemicalEmission",
+        "formula": "(Chemical_A * ChemA_EF + Chemical_B * ChemB_EF)"
+      },
+      "Sludge Emission": {
+        "stub": "SludgeEmission",
+        "formula": "Water_Volume * Sludge_Rate * Sludge_EF"
+      },
+      "Water CO2e": {
+        "stub": "Water_CO2e",
+        "formula": "TreatmentEnergy * Grid_EF_Water + ChemicalEmission + SludgeEmission"
+      }
+    },
+    "data": {
+      "Water_Volume": {
+        "name": "Water Volume (cubic meters)",
+        "value": 25000
+      },
+      "Energy_Intensity": {
+        "name": "Energy Intensity (kWh/m³)",
+        "value": 0.5
+      },
+      "Chemical_A": {
+        "name": "Chemical A Usage (kg)",
+        "value": 100
+      },
+      "ChemA_EF": {
+        "name": "Chemical A Emission Factor (kg CO2e/kg)",
+        "value": 2.5
+      },
+      "Chemical_B": {
+        "name": "Chemical B Usage (kg)",
+        "value": 50
+      },
+      "ChemB_EF": {
+        "name": "Chemical B Emission Factor (kg CO2e/kg)",
+        "value": 3.2
+      },
+      "Sludge_Rate": {
+        "name": "Sludge Generation Rate (kg/m³)",
+        "value": 0.02
+      },
+      "Sludge_EF": {
+        "name": "Sludge Emission Factor (kg CO2e/kg)",
+        "value": 0.8
+      },
+      "Grid_EF_Water": {
+        "name": "Grid Emission Factor for Water Treatment (kg CO2e/kWh)",
+        "value": 0.5
+      }
+    }
+  },
+  "Scope3_Total": {
+    "_description": "Scope 3 Summary",
+    "formulas": {
+      "Scope 3 Total": {
+        "stub": "Scope3_Total",
+        "formula": "ScaledTransport_CO2e + Waste_CO2e + Water_CO2e"
+      }
+    },
+    "data": {}
+  },
+  "GrandTotal": {
+    "_description": "Organization Total Emissions",
+    "formulas": {
+      "Total Carbon Footprint": {
+        "stub": "TotalCO2e",
+        "formula": "Scope1_Total + Scope2_Total + Scope3_Total"
+      },
+      "Per Capita Emission": {
+        "stub": "PerCapitaCO2e",
+        "formula": "TotalCO2e / Employee_Count"
+      },
+      "Emission Intensity": {
+        "stub": "EmissionIntensity",
+        "formula": "TotalCO2e / Revenue * 1000000"
+      }
+    },
+    "data": {
+      "Employee_Count": {
+        "name": "Number of Employees",
+        "value": 500
+      },
+      "Revenue": {
+        "name": "Annual Revenue (currency units)",
+        "value": 50000000
+      }
+    }
+  }
+}

@@ -1,0 +1,334 @@
+{
+  "test_execution_time": "2026-01-04T02:23:43.231596",
+  "total_test_cases": 30,
+  "statistics": {
+    "Valid Formula": {
+      "correct": 10,
+      "total": 10,
+      "accuracy": 100.0
+    },
+    "Requires Cleaning": {
+      "correct": 10,
+      "total": 10,
+      "accuracy": 100.0
+    },
+    "Invalid Input": {
+      "correct": 10,
+      "total": 10,
+      "accuracy": 100.0
+    },
+    "overall": {
+      "correct": 30,
+      "total": 30,
+      "accuracy": 100.0
+    }
+  },
+  "detailed_results": {
+    "Valid Formula": [
+      {
+        "id": "A01",
+        "input": "Fuel_Consumption * Emission_Factor",
+        "expected": true,
+        "actual": true,
+        "correct": true,
+        "rejection_stage": "PASSED",
+        "cleaned_formula": "Fuel_Consumption * Emission_Factor",
+        "description": "Basic multiplication formula with underscored variable names"
+      },
+      {
+        "id": "A02",
+        "input": "(m3 * (CH4_XGWP + CO2_XGWP + N2O_XGWP)) / 1000",
+        "expected": true,
+        "actual": true,
+        "correct": true,
+        "rejection_stage": "PASSED",
+        "cleaned_formula": "(m3 * (CH4_XGWP + CO2_XGWP + N2O_XGWP)) / 1000",
+        "description": "Complex nested formula matching prompt example exactly"
+      },
+      {
+        "id": "A03",
+        "input": "(m3 * (CH4_XGWP + CO2_XGWP + N2O_XGWP) * EfficiencyFactor) / 1000",
+        "expected": true,
+        "actual": true,
+        "correct": true,
+        "rejection_stage": "PASSED",
+        "cleaned_formula": "(m3 * (CH4_XGWP + CO2_XGWP + N2O_XGWP) * EfficiencyFactor) / 1000",
+        "description": "Improved formula version from prompt example"
+      },
+      {
+        "id": "A04",
+        "input": "Energy_kWh * Grid_EF / 1000",
+        "expected": true,
+        "actual": true,
+        "correct": true,
+        "rejection_stage": "PASSED",
+        "cleaned_formula": "Energy_kWh * Grid_EF / 1000",
+        "description": "Scope 2 electricity emission calculation formula"
+      },
+      {
+        "id": "A05",
+        "input": "AirTravelDistance * AirTravel_CO2_Factor",
+        "expected": true,
+        "actual": true,
+        "correct": true,
+        "rejection_stage": "PASSED",
+        "cleaned_formula": "AirTravelDistance * AirTravel_CO2_Factor",
+        "description": "Scope 3 business travel formula from prompt"
+      },
+      {
+        "id": "A06",
+        "input": "Distance * Weight * EF_Transport",
+        "expected": true,
+        "actual": true,
+        "correct": true,
+        "rejection_stage": "PASSED",
+        "cleaned_formula": "Distance * Weight * EF_Transport",
+        "description": "Transportation emission formula with three factors"
+      },
+      {
+        "id": "A07",
+        "input": "Base * (1 + Rate / 100)",
+        "expected": true,
+        "actual": true,
+        "correct": true,
+        "rejection_stage": "PASSED",
+        "cleaned_formula": "Base * (1 + Rate / 100)",
+        "description": "Formula with percentage calculation"
+      },
+      {
+        "id": "A08",
+        "input": "(Scope1 + Scope2 + Scope3) * Correction_Factor",
+        "expected": true,
+        "actual": true,
+        "correct": true,
+        "rejection_stage": "PASSED",
+        "cleaned_formula": "(Scope1 + Scope2 + Scope3) * Correction_Factor",
+        "description": "Total emission aggregation formula"
+      },
+      {
+        "id": "A09",
+        "input": "Consumption * Factor * (1 - Loss_Rate)",
+        "expected": true,
+        "actual": true,
+        "correct": true,
+        "rejection_stage": "PASSED",
+        "cleaned_formula": "Consumption * Factor * (1 - Loss_Rate)",
+        "description": "Formula with loss rate adjustment"
+      },
+      {
+        "id": "A10",
+        "input": "Activity_Data ** 0.5 * Coefficient",
+        "expected": true,
+        "actual": true,
+        "correct": true,
+        "rejection_stage": "PASSED",
+        "cleaned_formula": "Activity_Data ** 0.5 * Coefficient",
+        "description": "Formula with power operation"
+      }
+    ],
+    "Requires Cleaning": [
+      {
+        "id": "B01",
+        "input": "A \\times B",
+        "expected": true,
+        "actual": true,
+        "correct": true,
+        "rejection_stage": "PASSED",
+        "cleaned_formula": "A * B",
+        "description": "LaTeX multiplication symbol (should convert to *)"
+      },
+      {
+        "id": "B02",
+        "input": "A \\times B \\times C",
+        "expected": true,
+        "actual": true,
+        "correct": true,
+        "rejection_stage": "PASSED",
+        "cleaned_formula": "A * B * C",
+        "description": "Multiple LaTeX multiplication symbols"
+      },
+      {
+        "id": "B03",
+        "input": "Total \\times (1 + Rate)",
+        "expected": true,
+        "actual": true,
+        "correct": true,
+        "rejection_stage": "PASSED",
+        "cleaned_formula": "Total * (1 + Rate)",
+        "description": "LaTeX with parentheses (mixed format)"
+      },
+      {
+        "id": "B04",
+        "input": "A * B because it improves accuracy",
+        "expected": true,
+        "actual": true,
+        "correct": true,
+        "rejection_stage": "PASSED",
+        "cleaned_formula": "A * B",
+        "description": "Valid formula with trailing justification text"
+      },
+      {
+        "id": "B05",
+        "input": "X + Y to enhance the calculation",
+        "expected": true,
+        "actual": true,
+        "correct": true,
+        "rejection_stage": "PASSED",
+        "cleaned_formula": "X + Y",
+        "description": "Formula with 'to enhance' trailing text"
+      },
+      {
+        "id": "B06",
+        "input": "Fuel * EF will improve accuracy",
+        "expected": true,
+        "actual": true,
+        "correct": true,
+        "rejection_stage": "PASSED",
+        "cleaned_formula": "Fuel * EF",
+        "description": "Formula with 'will improve' trailing text"
+      },
+      {
+        "id": "B07",
+        "input": "  A  +  B  ",
+        "expected": true,
+        "actual": true,
+        "correct": true,
+        "rejection_stage": "PASSED",
+        "cleaned_formula": "A + B",
+        "description": "Formula with excessive whitespace"
+      },
+      {
+        "id": "B08",
+        "input": "(A + B",
+        "expected": true,
+        "actual": true,
+        "correct": true,
+        "rejection_stage": "PASSED",
+        "cleaned_formula": "(A + B)",
+        "description": "Unclosed parenthesis"
+      },
+      {
+        "id": "B09",
+        "input": "A + B)",
+        "expected": true,
+        "actual": true,
+        "correct": true,
+        "rejection_stage": "PASSED",
+        "cleaned_formula": "(A + B)",
+        "description": "Extra closing parenthesis"
+      },
+      {
+        "id": "B10",
+        "input": "\"A * B\"",
+        "expected": true,
+        "actual": true,
+        "correct": true,
+        "rejection_stage": "PASSED",
+        "cleaned_formula": "A * B",
+        "description": "Formula wrapped in quotation marks"
+      }
+    ],
+    "Invalid Input": [
+      {
+        "id": "C01",
+        "input": "should include efficiency factor",
+        "expected": false,
+        "actual": false,
+        "correct": true,
+        "rejection_stage": "SYNTAX_ERROR",
+        "cleaned_formula": "should include efficiency factor",
+        "description": "Descriptive text with 'should' keyword"
+      },
+      {
+        "id": "C02",
+        "input": "recommend using a better formula",
+        "expected": false,
+        "actual": false,
+        "correct": true,
+        "rejection_stage": "SYNTAX_ERROR",
+        "cleaned_formula": "recommend using a better formula",
+        "description": "Descriptive text with 'recommend' keyword"
+      },
+      {
+        "id": "C03",
+        "input": "consider adding the correction factor",
+        "expected": false,
+        "actual": false,
+        "correct": true,
+        "rejection_stage": "SYNTAX_ERROR",
+        "cleaned_formula": "consider adding the correction factor",
+        "description": "Descriptive text with 'consider' keyword"
+      },
+      {
+        "id": "C04",
+        "input": "this is an improvement for accuracy",
+        "expected": false,
+        "actual": false,
+        "correct": true,
+        "rejection_stage": "SYNTAX_ERROR",
+        "cleaned_formula": "this is an improvement for accuracy",
+        "description": "Descriptive text with 'improvement' keyword"
+      },
+      {
+        "id": "C05",
+        "input": "enhance the calculation method",
+        "expected": false,
+        "actual": false,
+        "correct": true,
+        "rejection_stage": "SYNTAX_ERROR",
+        "cleaned_formula": "enhance the calculation method",
+        "description": "Descriptive text with 'enhance' keyword"
+      },
+      {
+        "id": "C06",
+        "input": "AB",
+        "expected": false,
+        "actual": false,
+        "correct": true,
+        "rejection_stage": "SEMANTIC_ERROR",
+        "cleaned_formula": "AB",
+        "description": "Too short and no mathematical operator"
+      },
+      {
+        "id": "C07",
+        "input": "",
+        "expected": false,
+        "actual": false,
+        "correct": true,
+        "rejection_stage": "SEMANTIC_ERROR",
+        "cleaned_formula": "",
+        "description": "Empty string input"
+      },
+      {
+        "id": "C08",
+        "input": "the formula for the calculation with more accurate results",
+        "expected": false,
+        "actual": false,
+        "correct": true,
+        "rejection_stage": "SYNTAX_ERROR",
+        "cleaned_formula": "the formula for the calculation with more accurate results",
+        "description": "Excessive English words (>2 common words)"
+      },
+      {
+        "id": "C09",
+        "input": "No formula available",
+        "expected": false,
+        "actual": false,
+        "correct": true,
+        "rejection_stage": "SYNTAX_ERROR",
+        "cleaned_formula": "No formula available",
+        "description": "LLM failure response (no formula content)"
+      },
+      {
+        "id": "C10",
+        "input": "Please refer to the document for details",
+        "expected": false,
+        "actual": false,
+        "correct": true,
+        "rejection_stage": "SYNTAX_ERROR",
+        "cleaned_formula": "Please refer to the document for details",
+        "description": "LLM deflection response"
+      }
+    ]
+  }
+}
